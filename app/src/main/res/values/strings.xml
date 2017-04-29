@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Mobile Learning</string>
+    <string name="splash_text">Mobile Learning</string>
 </resources>

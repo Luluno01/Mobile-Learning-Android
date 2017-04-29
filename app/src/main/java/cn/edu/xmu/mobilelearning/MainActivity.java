@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private XWalkView mXWalkView;
     private long exitTime = 0;
     private boolean loadedOnce = false;
+    protected static MainActivity instance = null;
 
     class MyResourceClient extends XWalkResourceClient {
         MyResourceClient(XWalkView view) {
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
         setContentView(R.layout.activity_main);
         XWalkPreferences.setValue(XWalkPreferences.REMOTE_DEBUGGING, true);
         mXWalkView = (XWalkView) findViewById(R.id.xWalkView);

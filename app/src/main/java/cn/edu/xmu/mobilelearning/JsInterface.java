@@ -29,4 +29,10 @@ public class JsInterface {
     public void toastLong(String content) {
         Toast.makeText(this.activity, content, Toast.LENGTH_LONG).show();
     }
+
+    @JavascriptInterface
+    public void exit() {
+        MainActivity.instance.finish();
+        System.exit(0);
+    }
 }

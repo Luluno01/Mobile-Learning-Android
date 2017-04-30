@@ -32,7 +32,9 @@ public class JsInterface {
 
     @JavascriptInterface
     public void exit() {
-        MainActivity.instance.finish();
-        System.exit(0);
+        if(null != MainActivity.instance) {
+            MainActivity.instance.finish();
+            System.exit(0);
+        }
     }
 }

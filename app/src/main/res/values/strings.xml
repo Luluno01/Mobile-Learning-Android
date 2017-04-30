@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Mobile Learning</string>
     <string name="splash_text">Mobile Learning</string>
+    <string name="exit_confirm">Press the back button again to exit</string>
 </resources>

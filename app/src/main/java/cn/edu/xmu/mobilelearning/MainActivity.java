@@ -1,6 +1,7 @@
 package cn.edu.xmu.mobilelearning;
 
 //android
+import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.os.Handler;
 
 //crosswalk
 import org.xwalk.core.*;
+
+import com.githang.statusbar.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        StatusBarCompat.setStatusBarColor(instance, Color.rgb(238, 110, 115));
                         getSplashView().startAnimation(anim);
                     }
                 }, __SPLASH_DELAY__);
@@ -59,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         instance = this;
+
+        StatusBarCompat.setStatusBarColor(this, Color.rgb(255, 255, 255));
 
         XWalkPreferences.setValue(XWalkPreferences.REMOTE_DEBUGGING, true); // Enable remote debugging
 

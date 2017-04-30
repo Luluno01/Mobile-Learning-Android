@@ -128,6 +128,10 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         }
+        if(keyCode == KeyEvent.KEYCODE_MENU && event.getAction() == KeyEvent.ACTION_DOWN) {
+            mXWalkView.loadUrl("javascript:toggleSideNav();");
+            return true;
+        }
         return super.onKeyDown(keyCode, event);
     }
 

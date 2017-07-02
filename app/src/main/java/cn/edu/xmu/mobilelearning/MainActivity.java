@@ -4,6 +4,7 @@ package cn.edu.xmu.mobilelearning;
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.content.*;
 import android.view.KeyEvent;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private final static int __SPLASH_DELAY__ = 0;
     private final static int __SPLASH_FADE_DURATION__ = 500;
     private XWalkView mXWalkView;
+    private XWalkCookieManager mXWalkCookieManager;
     private long exitTime = 0;
     private boolean loadedOnce = false;
     public static MainActivity instance = null;
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        StatusBarCompat.setStatusBarColor(instance, Color.rgb(238, 110, 115));
+                        StatusBarCompat.setStatusBarColor(instance, ContextCompat.getColor(instance, R.color.colorAccent));
                         getSplashView().startAnimation(anim);
                     }
                 }, __SPLASH_DELAY__);
@@ -67,8 +69,13 @@ public class MainActivity extends AppCompatActivity {
         StatusBarCompat.setStatusBarColor(this, Color.rgb(255, 255, 255));
 
         XWalkPreferences.setValue(XWalkPreferences.REMOTE_DEBUGGING, true); // Enable remote debugging
+        XWalkPreferences.setValue(XWalkPreferences.ALLOW_UNIVERSAL_ACCESS_FROM_FILE, true);
 
         mXWalkView = (XWalkView) findViewById(R.id.xWalkView); // Get XWalkView
+
+        mXWalkCookieManager = new XWalkCookieManager();
+        mXWalkCookieManager.setAcceptCookie(true);
+        mXWalkCookieManager.setAcceptFileSchemeCookies(true);
 
         // Disable zoom
         XWalkSettings xWalkViewSettings = mXWalkView.getSettings();
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         mXWalkView.setResourceClient(new MyResourceClient(mXWalkView)); // Support for splash
         mXWalkView.addJavascriptInterface(new JsInterface(this), "NativeInterface"); // Add js interface
 
-        mXWalkView.load("file:///android_asset/index.html", null); // Load resource
+        mXWalkView.loadUrl("file:///android_asset/index.html"); // Load resource
     }
 
     @Override
